@@ -284,5 +284,22 @@ window.onhashchange = function(){
 }
 ```
 > 切换对应的任务显示
+```html
+<li v-for="task in tasks" 
+    :class="{completed:task.completed,editing:isEditing==task.id}"
+    v-if="show(task.completed)"
+>
+```
 
+```js
+methods:{
+    show(i){
+        if(this.flag===""){
+            return true;
+        }else if(this.flag.completed===i){
+            return true;
+        }
+    }
+}
+```
 
