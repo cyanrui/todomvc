@@ -21,10 +21,17 @@
 			newTask:"",
 			isEditing:-1,
 			status:true,
-			count:0,	
-			flag:"",//如果flag=="",表示路由在#/,就是全部显示	
+			count:0,
+			flag:location.hash=="#/active"?({completed:false}):(location.hash=="#/completed"?({completed:true}):"")
 		},
-		computed:{			
+		directives:{
+			"todo-focus":function(el,binding){
+				if(binding.value){
+					el.focus()
+				}
+			}
+		},		
+		computed:{	
 			activeNum(){
 				this.count = 0;
 				this.tasks.forEach((task)=>{

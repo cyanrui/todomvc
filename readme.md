@@ -17,6 +17,7 @@
 + 添加任务
 + 删除任务
 + 编辑任务
+  + 处于编辑状态的input自动聚焦
 + 切换任务完成状态
 + 批量切换任务状态
 + 清除已完成的任务
@@ -26,6 +27,7 @@
   + 点击按钮
   + 改变路由
 + 数据同步到本地存储中
+  
 
 ### 三 功能思路
 + 选择使用vue来完成这个项目:引入vue,在引入app.js之前
@@ -33,6 +35,7 @@
 + 添加任务:input.new-todo里面enter触发
 + 删除任务:button.destroy点击触发
 + 编辑任务:div.view>label双击触发
++ 处于编辑状态的input自动聚焦:使用自定义指令:v-todo-focus
 + 切换任务完成状态:input.toggle点击触发
 + 批量切换任务状态:label.toggle-all点击触发
 + 清除已完成的任务:button.clear-completed点击触发
@@ -302,4 +305,33 @@ methods:{
     }
 }
 ```
+
+### 十五 双击编辑自动聚焦
+```html
+<input class="edit" v-model="task.title"
+    @keyup.enter="isEditing=-1"
+    @blur="isEditing=-1"
+    v-todo-focus="isEditing==task.id"							
+>
+<!-- 如果isEditing==task.id为true,就让input自动聚焦 -->
+```
+```js
+directives:{
+    "todo-focus":function(el,binding){
+        if(binding.value){
+            el.focus()
+        }
+    }
+}
+```
+
+### bug修复
+> 首次输入hash不能显示对应任务bug解决方案
+```js
+data:{
+	flag:location.hash=="#/active"?({completed:false}):(location.hash=="#/completed"?({completed:true}):"")
+}
+```
+
+
 

@@ -32,14 +32,16 @@
 							<input class="toggle" type="checkbox" v-model="task.completed">
 							<label
 								@dblclick="isEditing=task.id"
-								v-text="task.title"
+								v-text="task.title"								
 							></label>
 							<button class="destroy" @click="remove(task.id)"></button>
 						</div>
 						<input class="edit" v-model="task.title"
 							@keyup.enter="isEditing=-1"
 							@blur="isEditing=-1"
+							v-todo-focus="isEditing==task.id"							
 						>
+						<!-- 如果isEditing==task.id为true,就让input自动聚焦 -->
 					</li>
 				</ul>
 			</section>
