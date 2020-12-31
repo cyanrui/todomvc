@@ -1,6 +1,6 @@
 ## TodoMVC
 ### 一 项目结构
-+ css1
++ css
   + app.css:我们的css就写在这里(如果不写css可以删除该文件和引用)
 + js
   + app.js:我们的代码就写在这里
